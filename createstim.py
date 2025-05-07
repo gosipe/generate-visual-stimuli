@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed May  7 15:43:29 2025
-
+Edited on Wed May 7 16:40:29 2025
 @author: jgronemeyer
 Adapted from: https://discourse.psychopy.org/t/save-stimulus-as-a-video-file-e-g-mp4/17523
 
@@ -19,6 +19,8 @@ import imageio
 import numpy as np
 
 def main():
+    image_flag=1
+    video_flag=1
     image_flag=1
     video_flag=1
     # create window
