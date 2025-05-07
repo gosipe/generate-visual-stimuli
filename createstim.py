@@ -19,6 +19,8 @@ import imageio
 import numpy as np
 
 def main():
+    image_flag=1
+    video_flag=1
     # create window
     win0 = visual.Window([800, 600], screen = 0, monitor = 'testMonitor',
                         fullscr=False, color=[0, 0, 0], units='pix')
@@ -52,16 +54,20 @@ def main():
     # Instead, we will use imageio to save the frames (win0.getMovieFrame() return PIL image frames).
     
     fps = 30
-    output_file = "output.mp4"
+    video_file = "output_video.avi"
+    if video_flag:
+        # write frames to mp4
+        with imageio.get_writer(video_file, fps=fps) as writer:
+            for img in frames:
+                # if img is a PIL Image, convert to numpy array
+                frame = np.array(img)
+                writer.append_data(frame)
 
-    # write frames to mp4
-    with imageio.get_writer(output_file, fps=fps, codec="libx264") as writer:
-        for img in frames:
-            # if img is a PIL Image, convert to numpy array
-            frame = np.array(img)
-            writer.append_data(frame)
+        print(f"Saved video to {video_file}")
+    image_file = "output_image.tiff"
+    if image_flag:
+        imageio.imwrite(image_file,frames[0])
+        print(f"Saved video to {image_file}")
 
-    print(f"Saved video to {output_file}")
-    
 if __name__ == "__main__":
     main()
