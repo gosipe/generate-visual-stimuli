@@ -21,8 +21,6 @@ import numpy as np
 def main():
     image_flag=1
     video_flag=1
-    image_flag=1
-    video_flag=1
     # create window
     win0 = visual.Window([800, 600], screen = 0, monitor = 'testMonitor',
                         fullscr=False, color=[0, 0, 0], units='pix')
