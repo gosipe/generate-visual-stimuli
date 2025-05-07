@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed May  7 15:43:29 2025
-
+Edited on Wed May 7 16:40:29 2025
 @author: jgronemeyer
 Adapted from: https://discourse.psychopy.org/t/save-stimulus-as-a-video-file-e-g-mp4/17523
 
@@ -19,6 +19,8 @@ import imageio
 import numpy as np
 
 def main():
+    image_flag=1
+    video_flag=1
     # create window
     win0 = visual.Window([800, 600], screen = 0, monitor = 'testMonitor',
                         fullscr=False, color=[0, 0, 0], units='pix')
@@ -52,16 +54,20 @@ def main():
     # Instead, we will use imageio to save the frames (win0.getMovieFrame() return PIL image frames).
     
     fps = 30
-    output_file = "output.mp4"
+    output_video = "output_video.avi"
+    if video_flag:
+        # write frames to AVI
+        with imageio.get_writer(output_video, fps=fps) as writer:
+            for img in frames:
+                # if img is a PIL Image, convert to numpy array
+                frame = np.array(img)
+                writer.append_data(frame)
 
-    # write frames to mp4
-    with imageio.get_writer(output_file, fps=fps, codec="libx264") as writer:
-        for img in frames:
-            # if img is a PIL Image, convert to numpy array
-            frame = np.array(img)
-            writer.append_data(frame)
-
-    print(f"Saved video to {output_file}")
+        print(f"Saved video to {output_video}")
+    output_image="output_image.tif"
+    if image_flag:
+        imageio.imwrite(output_image,frames[0])
+        print(f"Saved video to {output_image}")
     
 if __name__ == "__main__":
     main()
